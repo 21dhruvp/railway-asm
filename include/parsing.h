@@ -15,9 +15,6 @@
 
 using namespace std;
 
-vector<string> load_program(string &filepath);
 map<string, vector<string>> parse_directive(string filename, vector<string> &contents);
-vector<string> text_directive_to_program_memory(vector<string> &program);
-vector<string> data_directive_to_memory(vector<string> &data);
 
 #endif

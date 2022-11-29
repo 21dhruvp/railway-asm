@@ -7,11 +7,30 @@
 */
 
 #include <string>
+#include <fstream>
+#include <iostream>
 #include <vector>
 
 #include "../include/utility.h"
 
 using namespace std;
+
+vector<string> load_program(string &filepath) {
+    // Takes a filepath and loads it line by line into a list of instructions. Not parsed into directives.
+    vector<string> lines;
+
+    string line;
+    ifstream file(filepath);
+
+    // iterates through every line in the program
+    while (file.is_open()) {
+        if (getline(file, line)) {
+            lines.push_back(line);
+        }
+    }
+
+    return lines;
+}
 
 vector<string> tokenize(string tokenizable, char delim) {
     vector<string> tokenized;

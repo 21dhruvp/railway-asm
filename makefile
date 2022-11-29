@@ -1,5 +1,5 @@
 CXX       = g++
-CXX_FILES = ./src/main.cpp ./src/parsing.cpp ./src/utility.cpp ./src/instructions.cpp
+CXX_FILES = ./src/main.cpp ./src/utility.cpp ./src/parsing.cpp ./src/assembler/instructions.cpp ./src/assembler/assembler.cpp ./src/linker/stitcher.cpp ./src/linker/validator.cpp
 TARGET    = ./bin/railway-asm-x16
 CXXFLAGS  = -g -std=c++17 -Wall -Werror -pedantic-errors -fmessage-length=0
 

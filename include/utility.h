@@ -14,6 +14,7 @@
 
 using namespace std;
 
+vector<string> load_program(string &filepath);
 vector<string> tokenize(string tokenizable, char delim);
 
 #endif

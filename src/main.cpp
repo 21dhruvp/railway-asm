@@ -12,7 +12,7 @@
 #include <vector>
 
 #include "../include/errors.h"
-#include "../include/assembler/parsing.h"
+#include "../include/assembler/assembler.h"
 
 using namespace std;
 
@@ -24,14 +24,17 @@ int main(int argc, char** argv) {
     if (argc >= 2) {
         
         // BEGIN Linker
+        string main = (string) argv[1];
         vector<string> filenames;
 
-        for (int i = 0; i < argc; i++) {
-            // check if it is an option, else assume file
-            if (((string) argv[i]).at(0) == '-') {
-                // TODO: Option parsing
-            } else {
-                filenames.push_back((string) argv[i]);
+        if (argc >= 3) {
+            for (int i = 1; i < argc; i++) {
+                // check if it is an option, else assume file
+                if (((string) argv[i]).at(0) == '-') {
+                    // TODO: Option parsing
+                } else {
+                    filenames.push_back((string) argv[i]);
+                }
             }
         }
 
@@ -46,7 +49,7 @@ int main(int argc, char** argv) {
         // END Assembler
 
     } else {
-        cout << "Usage: " << argv[0] << " <.track filepath(s)> [...args]" << endl;
+        cout << "Usage: " << argv[0] << " <main .track filepath> [secondary .track filepath(s)] [...args]" << endl;
     }
 
     return 0;
