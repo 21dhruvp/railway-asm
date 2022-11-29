@@ -15,7 +15,7 @@
 
 using namespace std;
 
-map<string, vector<string>> parse_directives(string filename, vector<string> &contents) {
+map<string, vector<string>> parse_directives(vector<string> &contents) {
     // Takes the program and splits it up into its directives.
     map<string, vector<string>> directives;
     
@@ -30,7 +30,7 @@ map<string, vector<string>> parse_directives(string filename, vector<string> &co
         if (contents[i].at(0) == '(') {
 
             if (directive_active) {
-                string message = Color().RED+"error on line #"+to_string(i)+" in file '"+filename+"'"+Color().reset+": Cannot open another directive while a directive is already open!";
+                string message = Color().RED+"error on line #"+to_string(i)+Color().reset+": Cannot open another directive while a directive is already open!";
                 throw railway_syntax_error(&message[0]);
             }
 

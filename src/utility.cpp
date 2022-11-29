@@ -57,3 +57,16 @@ int fast_atoi(const char* str) {
 
     return val;
 }
+
+void trim(string& s)  {
+    string t = "";
+
+    int i = 0;
+    while (s[i] == ' ') i++;
+    while (s[i] == '\t') i++;
+    for (i; i < s.length(); i++) {
+        t += s[i];
+    }
+
+    s = t;
+}
