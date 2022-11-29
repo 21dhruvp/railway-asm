@@ -10,9 +10,13 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <map>
 
 #include "../include/errors.h"
 #include "../include/assembler/assembler.h"
+#include "../include/parsing.h"
+#include "../include/utility.h"
+#include "../include/linker/stitcher.h"
 
 using namespace std;
 

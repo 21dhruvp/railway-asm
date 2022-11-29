@@ -1,0 +1,13 @@
+(program
+    get n1, r1
+    get n2, r2
+
+    %add_two_nums
+
+    dne
+)
+
+(data
+    [n1 *integer] 9
+    [n2 *integer] 10
+)

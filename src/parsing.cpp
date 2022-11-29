@@ -25,6 +25,10 @@ map<string, vector<string>> parse_directives(vector<string> &contents) {
 
     for (size_t i = 0; i < contents.size(); i++) {
 
+        if (contents[i].size() == 0) {
+            continue;
+        }
+
         // if it is an open parentheses, we can determine that a directive is open.
         // if it detects another open parentheses, we can determine a syntax error.
         if (contents[i].at(0) == '(') {

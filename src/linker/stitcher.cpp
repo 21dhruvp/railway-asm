@@ -1,6 +1,7 @@
 #include <vector>
 #include <map>
 #include <string>
+#include <iostream>
 
 #include "../../include/linker/stitcher.h"
 #include "../../include/parsing.h"
@@ -15,6 +16,10 @@ void stitch_program(map<string, vector<string>> &main, vector<string> secondary_
         string key = directives.first;
 
         for (size_t i = 0; i < main[key].size(); i++) {
+            if (main[key][i].size() == 0) {
+                continue;
+            }
+
             trim(main[key][i]);
 
             // look for outside insertions
@@ -38,8 +43,9 @@ void stitch_program(map<string, vector<string>> &main, vector<string> secondary_
                 main[key].erase(main[key].begin() + i);
 
                 // insert all contents at the position of the reference
-                for (size_t j = 0; j < stitchable.size(); i++) {
-                    main[key].insert(main[key].begin() + j, stitchable[j]);
+                for (size_t j = 0; j < stitchable.size(); j++) {
+                    trim(stitchable[j]);
+                    main[key].insert(main[key].begin() + i, stitchable[j]);
                 }
             }
         }

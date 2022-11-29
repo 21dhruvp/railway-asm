@@ -23,11 +23,11 @@ vector<string> load_program(string &filepath) {
     ifstream file(filepath);
 
     // iterates through every line in the program
-    while (file.is_open()) {
-        if (getline(file, line)) {
-            lines.push_back(line);
-        }
+    while (getline(file, line)) {
+        lines.push_back(line);
     }
+
+    file.close();
 
     return lines;
 }
@@ -64,8 +64,9 @@ void trim(string& s)  {
     int i = 0;
     while (s[i] == ' ') i++;
     while (s[i] == '\t') i++;
-    for (i; i < s.length(); i++) {
+    while (i < s.length()) {
         t += s[i];
+        i++;
     }
 
     s = t;
