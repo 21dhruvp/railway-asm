@@ -15,6 +15,6 @@
 
 using namespace std;
 
-map<string, vector<string>> parse_directive(string filename, vector<string> &contents);
+map<string, vector<string>> parse_directives(string filename, vector<string> &contents);
 
 #endif
