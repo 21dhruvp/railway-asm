@@ -9,7 +9,7 @@
 
 using namespace std;
 
-void stitch_program(map<string, vector<string>> &main, vector<string> secondary_filepaths) {
+void stitch(map<string, vector<string>> &main, vector<string> secondary_filepaths) {
     vector<string> stitched;
 
     for (const auto &directives : main) {

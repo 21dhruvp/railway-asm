@@ -6,17 +6,23 @@
  * Copyright 2022 Ryan Monaghan. All rights reserved.
 */
 
-
+// standard library headers
 #include <iostream>
 #include <string>
 #include <vector>
 #include <map>
 
+
+// custom headers
 #include "../include/errors.h"
-#include "../include/assembler/assembler.h"
 #include "../include/parsing.h"
 #include "../include/utility.h"
+
+#include "../include/assembler/instructions.h"
+#include "../include/assembler/assembler.h"
+
 #include "../include/linker/stitcher.h"
+#include "../include/linker/validator.h"
 
 using namespace std;
 
@@ -26,13 +32,12 @@ railway-asm is a linker & assembler built in to one program.
 
 int main(int argc, char** argv) {
     if (argc >= 2) {
-        
-        // BEGIN Linker
+
         string main = (string) argv[1];
         vector<string> filenames;
 
         if (argc >= 3) {
-            for (int i = 1; i < argc; i++) {
+            for (int i = 2; i < argc; i++) {
                 // check if it is an option, else assume file
                 if (((string) argv[i]).at(0) == '-') {
                     // TODO: Option parsing
@@ -42,15 +47,16 @@ int main(int argc, char** argv) {
             }
         }
 
-        // TODO: Combine directives into one. (Potentially. Maybe just one program at a time but this could be an opurtunity for extra credit.)
+        vector<string> main_contents = load_program(main);
+        map<string, vector<string>> main_directives = parse_directives(main_contents);
 
-        // END Linker
+        stitch(main_directives, filenames);
 
-        // BEGIN Assembler
+        // TODO: Validate syntax of files before assembling.
+        //!Defined but not implemented!
+        validate(main_directives);
 
         // TODO: Implement assembler using methods defined in instructions.h and parsing.h.
-
-        // END Assembler
 
     } else {
         cout << "Usage: " << argv[0] << " <main .track filepath> [secondary .track filepath(s)] [...args]" << endl;

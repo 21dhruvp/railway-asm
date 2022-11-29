@@ -6,9 +6,9 @@
 
 using namespace std;
 
-void validate(vector<string> &program);
+void validate(map<string, vector<string>> &program);
 
-void syntax_validate(vector<string> &program);
-void value_validate(vector<string> &program);
+void syntax_validate(map<string, vector<string>> &program);
+void value_validate(map<string, vector<string>> &program);
 
 #endif
