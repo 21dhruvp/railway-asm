@@ -26,7 +26,7 @@ map<string, vector<string>> parse_directives(string filename, vector<string> &co
     for (size_t i = 0; i < contents.size(); i++) {
 
         // if it is an open parentheses, we can determine that a directive is open.
-        // if it detects 2 open parentheses, we can determine a syntax error.
+        // if it detects another open parentheses, we can determine a syntax error.
         if (contents[i].at(0) == '(') {
 
             if (directive_active) {
