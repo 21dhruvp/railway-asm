@@ -32,20 +32,19 @@ vector<string> load_program(string &filepath) {
     return lines;
 }
 
-vector<string> tokenize(string tokenizable, char delim) {
-    vector<string> tokenized;
-    string temp;
-    
-    for (size_t i = 0; i < tokenizable.size(); i++) {
-        if (tokenizable.at(i) == delim) {
-            tokenized.push_back(temp);
-            temp = "";
-        } else {
-            temp.append(to_string(tokenizable.at(i)));
-        }
+vector<string> tokenize(string s, string delimiter) {
+    size_t pos_start = 0, pos_end, delim_len = delimiter.length();
+    string token;
+    vector<string> res;
+
+    while ((pos_end = s.find (delimiter, pos_start)) != string::npos) {
+        token = s.substr (pos_start, pos_end - pos_start);
+        pos_start = pos_end + delim_len;
+        res.push_back (token);
     }
 
-    return tokenized;
+    res.push_back (s.substr (pos_start));
+    return res;
 }
 
 int fast_atoi(const char* str) {
@@ -68,6 +67,8 @@ void trim(string& s)  {
         t += s[i];
         i++;
     }
+
+    transform(t.begin(), t.end(), t.begin(), [](char c){ return tolower(c); });
 
     s = t;
 }

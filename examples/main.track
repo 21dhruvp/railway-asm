@@ -1,6 +1,9 @@
 (program
-    get n1, r1
-    get n2, r2
+    lda n1, r1
+    lda n2, r2
+
+    get r1, r1
+    get r2, r2
 
     %add_two_nums
 
@@ -8,6 +11,6 @@
 )
 
 (data
-    [n1 *integer] 9
-    [n2 *integer] 10
+    [n1 integer] 9
+    [n2 integer] 10
 )

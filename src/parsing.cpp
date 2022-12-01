@@ -12,6 +12,7 @@
 
 #include "../include/parsing.h"
 #include "../include/errors.h"
+#include "../include/utility.h"
 
 using namespace std;
 
@@ -25,6 +26,8 @@ map<string, vector<string>> parse_directives(vector<string> &contents) {
 
     for (size_t i = 0; i < contents.size(); i++) {
 
+        trim(contents[i]);
+
         if (contents[i].size() == 0) {
             continue;
         }
@@ -32,7 +35,6 @@ map<string, vector<string>> parse_directives(vector<string> &contents) {
         // if it is an open parentheses, we can determine that a directive is open.
         // if it detects another open parentheses, we can determine a syntax error.
         if (contents[i].at(0) == '(') {
-
             if (directive_active) {
                 string message = Color().RED+"error on line #"+to_string(i)+Color().reset+": Cannot open another directive while a directive is already open!";
                 throw railway_syntax_error(&message[0]);
