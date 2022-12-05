@@ -57,8 +57,6 @@ int main(int argc, char** argv) {
         validate(main_directives);
 
         // TODO: Implement assembler using methods defined in instructions.h and parsing.h.
-        vector<string> data_labels = calculate_data_labels(main_directives["data"]);
-        get_machine_code_from_line(main_directives["program"][0], data_labels);
 
     } else {
         cout << "Usage: " << argv[0] << " <main .track filepath> [secondary .track filepath(s)] [...args]" << endl;

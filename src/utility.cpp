@@ -75,15 +75,20 @@ void trim(string& s)  {
 }
 
 string binary_n_bit_representation(int n, int width) {
-    string bin = "";
+    string bin = bitset<64> (n).to_string();
 
-     while (n != 0) {
-        bin += (n % 2 == 0 ? "0" : "1");
-        n /= 2;
-    };
+    const auto start = bin.find('1');
+     
+    if(start != string::npos) {
+        bin = bin.substr(start);
+    }
 
+    if (n == 0) {
+        bin = "0";
+    }
+    
     if (bin.size() > width) {
-        string message = Color().RED+"missed value in validator"+Color().reset+": Integer too large!";
+        string message = Color().RED+"missed value in validator"+Color().reset+": Integer too large! ("+(to_string(n))+")";
         throw railway_syntax_error(&message[0]);
     } else if (bin.size() < width) {
         int len = bin.size();
