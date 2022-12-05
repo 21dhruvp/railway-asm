@@ -58,3 +58,13 @@ map<string, vector<string>> parse_directives(vector<string> &contents) {
 
     return directives;
 }
+
+vector<string> calculate_data_labels(vector<string> &data_direcrtive) {
+    vector<string> calculated;
+    for (const auto &line : data_direcrtive) {
+        vector<string> tokenized = tokenize(line, " ");
+
+        calculated.push_back(tokenized[0].replace(0, 1, ""));
+    }
+    return calculated;
+}

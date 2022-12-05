@@ -16,5 +16,6 @@
 using namespace std;
 
 map<string, vector<string>> parse_directives(vector<string> &contents);
+vector<string> calculate_data_labels(vector<string> &data_direcrtive);
 
 #endif

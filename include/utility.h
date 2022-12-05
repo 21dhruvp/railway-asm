@@ -18,5 +18,6 @@ vector<string> load_program(string &filepath);
 vector<string> tokenize(string s, string delimiter);
 int fast_atoi(const char* str);
 void trim(string& s);
+string binary_n_bit_representation(int n, int width);
 
 #endif

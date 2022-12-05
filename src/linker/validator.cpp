@@ -4,6 +4,7 @@
 #include <set>
 
 #include "../../include/linker/validator.h"
+#include "../../include/parsing.h"
 #include "../../include/assembler/instructions.h"
 #include "../../include/errors.h"
 #include "../../include/utility.h"
@@ -49,7 +50,7 @@ void syntax_validate(map<string, vector<string>> &program) {
             throw railway_syntax_error(&message[0]);
         }
 
-        if ((tokenized[0] != "lda" && tokenized[0] != "dne") && tokenized[2].at(0) != 'r') {
+        if ((tokenized[0] != "lda" && tokenized[0] != "dne" && tokenized[0] != "get" && tokenized[0] != "put") && tokenized[2].at(0) != 'r') {
             string message = Color().RED+"error in text directive on line #"+to_string(line)+Color().reset+": Argument 2 must be a register! ("+instruction+")";
             throw railway_syntax_error(&message[0]);
         }
@@ -95,6 +96,7 @@ void value_validate(map<string, vector<string>> &program) {
     //*text directive checking
     int line = 1;
     vector<string> instructions = program["program"];
+    vector<string> data_labels = calculate_data_labels(program["data"]);
     for (const string &instruction : instructions) {
         vector<string> tokenized = tokenize(instruction, " ");
 
@@ -109,11 +111,20 @@ void value_validate(map<string, vector<string>> &program) {
                         throw railway_syntax_error(&message[0]);
                     } 
                 } else {
-                    int imm_val = fast_atoi(&tokenized[i][0]);
-                    cout << instruction << endl;
-                    if (imm_val < 0 || imm_val > 31) {
-                        string message = Color().RED+"error in text directive on line #"+to_string(line)+Color().reset+": Immediate value is too big!";
-                        throw railway_syntax_error(&message[0]);
+                    bool is_label = false;
+                    for (size_t j = 0; j < data_labels.size(); j++) {
+                        if (tokenized[i] == data_labels[j]) {
+                            is_label = true;
+                            break;
+                        }
+                    }
+
+                    if (!is_label) {
+                        int imm_val = fast_atoi(&tokenized[i][tokenized[i].size() - 1]);
+                        if (imm_val < 0 || imm_val > 31) {
+                            string message = Color().RED+"error in text directive on line #"+to_string(line)+Color().reset+": Immediate value is too big!";
+                            throw railway_syntax_error(&message[0]);
+                        }
                     }
                 }
 
@@ -140,7 +151,7 @@ void value_validate(map<string, vector<string>> &program) {
 
     if ((int) labels.size() != additions) {
         string message = Color().YELLOW+"some labels are being reused! please check data segment in all files!"+Color().reset;
-                        throw railway_syntax_error(&message[0]);
+        throw railway_syntax_error(&message[0]);
     }
 
     return;

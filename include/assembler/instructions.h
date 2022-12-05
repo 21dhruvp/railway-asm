@@ -16,16 +16,24 @@ using namespace std;
 // 5 Bit instruction itentifier with control signals. 16 bit total instruction width.
 enum class Instruction {
     // Structure is as follows:
-    // Needs ALU? Is immediate? Operation? Get memory? Put memory?
-    //     0           0            0           0           0
+    // WriteReg? Imm? Operation? MemRead? MemWrite?
+    //     0        0      0        0           0
     //
-    // Instruction (Registers):
+    // ADD & SUB:
     // name  Rd  Rn  Filler Rm
     // 00000 000 000 00     000
     //
-    // Instruction (Immediate):
+    // ADD & SUB imm:
     // name  Rd  Rn  imm
-    // 00000 000 000 000000
+    // 00000 000 000 00000
+    //
+    // GET & PUT
+    // name  Rd  label filler Rn
+    // 00000 000 000   00     000
+    //
+    // GET & PUT imm
+    // name  Rd  label imm
+    // 00000 000 000   00000
 
     ADD,    // 10000
     ADDimm, // 11000
@@ -34,12 +42,10 @@ enum class Instruction {
     GET,    // 10010
     GETimm, // 01010
     PUT,    // 10001
-    PUTimm, // 11001
-    LDA,    // 00010
-    DNE     // 00000
+    PUTimm  // 11001
 };
 
-string get_machine_code_from_line(string &line);
+string get_machine_code_from_line(string &line, vector<string> &data_labels);
 string get_data_bytes_from_line(string &line);
 
 #endif

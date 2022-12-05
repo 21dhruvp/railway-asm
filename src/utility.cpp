@@ -11,6 +11,7 @@
 #include <iostream>
 #include <vector>
 
+#include "../include/errors.h"
 #include "../include/utility.h"
 
 using namespace std;
@@ -71,4 +72,25 @@ void trim(string& s)  {
     transform(t.begin(), t.end(), t.begin(), [](char c){ return tolower(c); });
 
     s = t;
+}
+
+string binary_n_bit_representation(int n, int width) {
+    string bin = "";
+
+     while (n != 0) {
+        bin += (n % 2 == 0 ? "0" : "1");
+        n /= 2;
+    };
+
+    if (bin.size() > width) {
+        string message = Color().RED+"missed value in validator"+Color().reset+": Integer too large!";
+        throw railway_syntax_error(&message[0]);
+    } else if (bin.size() < width) {
+        int len = bin.size();
+        for (int i = 0; i < width - len; i++) {
+            bin = "0"+bin;
+        }
+    }
+
+    return bin;
 }

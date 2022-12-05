@@ -1,13 +1,9 @@
 (program
-    lda n1, r1
-    lda n2, r2
 
-    get r1, r1
-    get r2, r2
+    get r1 n1 0
+    get r2 n2 0
 
     %add_two_nums
-
-    dne
 )
 
 (data
