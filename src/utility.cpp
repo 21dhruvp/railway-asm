@@ -33,6 +33,14 @@ vector<string> load_program(string &filepath) {
     return lines;
 }
 
+void write_memory_file(string &filepath, string &contents) {
+    ofstream f;
+
+    f.open(filepath);
+    f << contents;
+    f.close();
+}
+
 vector<string> tokenize(string s, string delimiter) {
     size_t pos_start = 0, pos_end, delim_len = delimiter.length();
     string token;

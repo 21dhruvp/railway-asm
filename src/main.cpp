@@ -35,12 +35,15 @@ int main(int argc, char** argv) {
 
         string main = (string) argv[1];
         vector<string> filenames;
+        string output_directory = "./";
 
         if (argc >= 3) {
             for (int i = 2; i < argc; i++) {
                 // check if it is an option, else assume file
                 if (((string) argv[i]).at(0) == '-') {
-                    // TODO: Option parsing
+                    if ((string) argv[i] == "-o" || (string) argv[i] == "--out") {
+                        output_directory = (string) argv[++i];
+                    }
                 } else {
                     filenames.push_back((string) argv[i]);
                 }
@@ -52,14 +55,23 @@ int main(int argc, char** argv) {
 
         stitch(main_directives, filenames);
 
-        // TODO: Validate syntax of files before assembling.
-        //!Defined but not implemented!
+        // Validate syntax of files before assembling.
         validate(main_directives);
 
-        // TODO: Implement assembler using methods defined in instructions.h and parsing.h.
+        // Implement assembler using methods defined in instructions.h and assembler.h.
+        vector<string> data_labels = calculate_data_labels(main_directives["data"]);
+
+        string program_memory = text_directive_to_program_memory(main_directives["program"], data_labels);
+        string data_memory = data_directive_to_memory(main_directives["data"]);
+
+        // Save files to output directory
+        string p_path = output_directory+"/program.txt";
+        string d_path = output_directory+"/data.txt";
+        write_memory_file(p_path, program_memory);
+        write_memory_file(d_path, data_memory);
 
     } else {
-        cout << "Usage: " << argv[0] << " <main .track filepath> [secondary .track filepath(s)] [...args]" << endl;
+        cout << "Usage: " << argv[0] << " <main .track filepath> [secondary .track filepath(s)] [-o output_dir]" << endl;
     }
 
     return 0;

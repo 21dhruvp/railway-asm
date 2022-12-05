@@ -1,12 +1,16 @@
 (program
-
     get r1 n1 0
     get r2 n2 0
 
     %add_two_nums
-)
 
+    get r1 n3 0
+    get r2 n4 0
+
+    %add_two_nums
+)
 (data
     [n1 integer] 9
     [n2 integer] 10
+    %add_two_nums
 )

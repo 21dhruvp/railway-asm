@@ -91,7 +91,7 @@ void syntax_validate(map<string, vector<string>> &program) {
 }
 
 void value_validate(map<string, vector<string>> &program) {
-    // TODO: Check line by line for value errors. (invalid registers, integers larger than 6 bits, etc.)
+    // Check line by line for value errors. (invalid registers, integers larger than 6 bits, etc.)
     
     //*text directive checking
     int line = 1;
@@ -99,7 +99,7 @@ void value_validate(map<string, vector<string>> &program) {
     vector<string> data_labels = calculate_data_labels(program["data"]);
     for (const string &instruction : instructions) {
         vector<string> tokenized = tokenize(instruction, " ");
-
+        
         if (tokenized[0] != "lda" && tokenized[0] != "dne") {
             for (int i = 1; i < tokenized.size(); i++) {
 
@@ -133,7 +133,6 @@ void value_validate(map<string, vector<string>> &program) {
 
         line++;
     }
-
     //*data directive checking for reused labels
     line = 1;
     instructions = program["data"];

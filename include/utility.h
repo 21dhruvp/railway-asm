@@ -15,6 +15,7 @@
 using namespace std;
 
 vector<string> load_program(string &filepath);
+void write_memory_file(string &filepath, string &contents);
 vector<string> tokenize(string s, string delimiter);
 int fast_atoi(const char* str);
 void trim(string& s);

@@ -15,7 +15,10 @@
 
 using namespace std;
 
-vector<string> text_directive_to_program_memory(vector<string> &program);
-vector<string> data_directive_to_memory(vector<string> &data);
+const int PROGRAM_MEMORY_WIDTH = 16;
+const int DATA_MEMORY_WIDTH = 16;
+
+string text_directive_to_program_memory(vector<string> &program, vector<string> &data_labels);
+string data_directive_to_memory(vector<string> &data);
 
 #endif

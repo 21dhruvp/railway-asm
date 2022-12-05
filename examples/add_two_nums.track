@@ -1,3 +1,7 @@
 (program
     add r0 r1 r2
 )
+(data
+    [n3 integer] 11
+    [n4 integer] 12
+)

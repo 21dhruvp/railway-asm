@@ -142,8 +142,24 @@ string get_machine_code_from_line(string &line, vector<string> &data_labels) {
 
 
 string get_data_bytes_from_line(string &line) {
-    // TODO: Takes a line from the data directive and computes the offsets for where it will be stored.
+    // Takes a line from the data directive and computes the offsets for where it will be stored.
     string bytes;
 
+    vector<string> ingest = tokenize(line, " ");
+
+    bytes = binary_n_bit_representation(fast_atoi(ingest[2].c_str()), 8);
+
+    int result = 0;
+
+    for(size_t i = 0; i < bytes.length(); i++) {
+        result <<= 1;
+        result += bytes[i] == '1' ? 1 : 0;
+    }  
+
+    stringstream ss;
+    ss << hex << setw(2) << setfill('0')  << result;
+
+    bytes = ss.str();
+    
     return bytes;
 }
