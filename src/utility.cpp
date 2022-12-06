@@ -66,20 +66,37 @@ int fast_atoi(const char* str) {
     return val;
 }
 
-void trim(string& s)  {
-    string t = "";
+string trim(string &str, const string &whitespace) {
+    const auto strBegin = str.find_first_not_of(whitespace);
+    if (strBegin == std::string::npos)
+        return ""; // no content
 
-    int i = 0;
-    while (s[i] == ' ') i++;
-    while (s[i] == '\t') i++;
-    while (i < s.length()) {
-        t += s[i];
-        i++;
+    const auto strEnd = str.find_last_not_of(whitespace);
+    const auto strRange = strEnd - strBegin + 1;
+
+    return str.substr(strBegin, strRange);
+}
+
+string reduce(string &str, const string &fill, const string &whitespace) {
+    // trim first
+    string result = trim(str, whitespace);
+
+    // replace sub ranges
+    size_t begin = result.find_first_of(whitespace);
+    while (begin != std::string::npos)
+    {
+        size_t end = result.find_first_not_of(whitespace, begin);
+        size_t range = end - begin;
+
+        result.replace(begin, range, fill);
+
+        size_t n_start = begin + fill.length();
+        begin = result.find_first_of(whitespace, n_start);
     }
 
-    transform(t.begin(), t.end(), t.begin(), [](char c){ return tolower(c); });
+    transform(result.begin(), result.end(), result.begin(), [](char c){ return tolower(c); });
 
-    s = t;
+    return result;
 }
 
 string binary_n_bit_representation(int n, int width) {

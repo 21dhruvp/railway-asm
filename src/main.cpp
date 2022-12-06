@@ -51,9 +51,14 @@ int main(int argc, char** argv) {
         }
 
         vector<string> main_contents = load_program(main);
+        main_contents = strip_comments(main_contents);
         map<string, vector<string>> main_directives = parse_directives(main_contents);
 
         stitch(main_directives, filenames);
+
+        for (size_t i = 0; i < main_directives["date"].size(); i++) {
+            cout << main_directives["data"][i] << endl;
+        }
 
         // Validate syntax of files before assembling.
         validate(main_directives);

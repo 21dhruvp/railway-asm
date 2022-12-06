@@ -15,6 +15,7 @@
 
 using namespace std;
 
+vector<string> strip_comments(vector<string> &contents);
 map<string, vector<string>> parse_directives(vector<string> &contents);
 vector<string> calculate_data_labels(vector<string> &data_direcrtive);
 

@@ -28,7 +28,7 @@ class railway_syntax_error : public exception {
         char * message;
 
     public:
-        railway_syntax_error(char * msg) : message(msg) {}
+        railway_syntax_error(char* msg) : message(msg) {}
         const char* what() const noexcept override {
             return message;
         }

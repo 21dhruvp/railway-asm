@@ -12,6 +12,8 @@
 #include <string>
 
 using namespace std;
+// 01010 001 000 00000
+
 
 // 5 Bit instruction itentifier with control signals. 16 bit total instruction width.
 enum class Instruction {
@@ -20,18 +22,18 @@ enum class Instruction {
     //     0        0      0        0           0
     //
     // ADD & SUB:
-    // name  Rd  Rn  Filler Rm
-    // 00000 000 000 00     000
+    // name  Rd  Rn  Rm  filler
+    // 00000 000 000 000 00
     //
     // ADD & SUB imm:
     // name  Rd  Rn  imm
     // 00000 000 000 00000
     //
-    // GET & PUT
-    // name  Rd  label filler Rn
-    // 00000 000 000   00     000
+    // GET
+    // name  Rd  label Rn  filler
+    // 00000 000 000   000 00
     //
-    // GET & PUT imm
+    // GET imm
     // name  Rd  label imm
     // 00000 000 000   00000
 
@@ -40,9 +42,7 @@ enum class Instruction {
     SUB,    // 10100
     SUBimm, // 11100
     GET,    // 10010
-    GETimm, // 01010
-    PUT,    // 10001
-    PUTimm  // 11001
+    GETimm, // 11010
 };
 
 string get_machine_code_from_line(string &line, vector<string> &data_labels);

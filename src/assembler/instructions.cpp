@@ -41,8 +41,8 @@ string get_machine_code_from_line(string &line, vector<string> &data_labels) {
         if (instruction == Instruction::ADDimm) {
             compiled += binary_n_bit_representation(fast_atoi(interpretable[3].c_str()), 5);
         } else {
-            compiled += "00";
             compiled += binary_n_bit_representation(interpretable[3].at(1) - '0', 3);
+            compiled += "00";
         }
     } else if (instruction_name == "sub") {
         if (interpretable[interpretable.size() - 1].at(0) == 'r') {
@@ -59,8 +59,8 @@ string get_machine_code_from_line(string &line, vector<string> &data_labels) {
         if (instruction == Instruction::SUBimm) {
             compiled += binary_n_bit_representation(fast_atoi(interpretable[3].c_str()), 5);
         } else {
-            compiled += "00";
             compiled += binary_n_bit_representation(interpretable[3].at(1) - '0', 3);
+            compiled += "00";
         }
     } else if (instruction_name == "get") {
         if (interpretable[interpretable.size() - 1].at(0) == 'r') {
@@ -68,7 +68,7 @@ string get_machine_code_from_line(string &line, vector<string> &data_labels) {
             compiled += "10010";
         } else {
             instruction = Instruction::GETimm;
-            compiled += "01010";
+            compiled += "11010";
         }
 
         compiled += binary_n_bit_representation(interpretable[1].at(1) - '0', 3);
@@ -90,38 +90,8 @@ string get_machine_code_from_line(string &line, vector<string> &data_labels) {
         if (instruction == Instruction::GETimm) {
             compiled += binary_n_bit_representation(fast_atoi(interpretable[3].c_str()), 5);
         } else {
-            compiled += "00";
             compiled += binary_n_bit_representation(interpretable[3].at(1) - '0', 3);
-        }
-    } else if (instruction_name == "put") {
-        if (interpretable[interpretable.size() - 1].at(0) == 'r') {
-            instruction = Instruction::PUT;
-            compiled += "10001";
-        } else {
-            instruction = Instruction::PUTimm;
-            compiled += "11001";
-        }
-
-        int matched = -1;
-        for (size_t i = 0; i < data_labels.size(); i++) {
-            if (data_labels[i] == interpretable[2]) {
-                matched = i;
-                break;
-            }
-        }
-
-        if (matched == -1) {
-            string message = Color().RED+"error in text directive"+Color().reset+": Label '"+interpretable[2]+"' does not exist!";
-            throw railway_syntax_error(&message[0]);
-        }
-
-        compiled += binary_n_bit_representation(matched, 3);
-
-        if (instruction == Instruction::PUTimm) {
-            compiled += binary_n_bit_representation(fast_atoi(interpretable[3].c_str()), 5);
-        } else {
             compiled += "00";
-            compiled += binary_n_bit_representation(interpretable[3].at(1) - '0', 3);
         }
     }
 

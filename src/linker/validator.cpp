@@ -35,22 +35,17 @@ void syntax_validate(map<string, vector<string>> &program) {
             throw railway_syntax_error(&message[0]);
         }
 
-        if ((tokenized[0] != "get" && tokenized[0] != "put" && tokenized[0] != "lda" && tokenized[0] != "dne") && tokenized.size() < 4) {
+        if (tokenized.size() < 4) {
             string message = Color().RED+"error in text directive on line #"+to_string(line)+Color().reset+": Missing arguments! ("+instruction+")";
             throw railway_syntax_error(&message[0]);
         }
 
-        if ((tokenized[0] == "get" || tokenized[0] == "put" || tokenized[0] == "lda") && tokenized.size() < 3) {
-            string message = Color().RED+"error in text directive on line #"+to_string(line)+Color().reset+": Missing arguments! ("+instruction+")";
-            throw railway_syntax_error(&message[0]);
-        }
-
-        if ((tokenized[0] != "lda" && tokenized[0] != "dne") && tokenized[1].at(0) != 'r') {
+        if (tokenized[1].at(0) != 'r') {
             string message = Color().RED+"error in text directive on line #"+to_string(line)+Color().reset+": Argument 1 must be a register! ("+instruction+")";
             throw railway_syntax_error(&message[0]);
         }
 
-        if ((tokenized[0] != "lda" && tokenized[0] != "dne" && tokenized[0] != "get" && tokenized[0] != "put") && tokenized[2].at(0) != 'r') {
+        if (tokenized[0] != "get" && tokenized[2].at(0) != 'r') {
             string message = Color().RED+"error in text directive on line #"+to_string(line)+Color().reset+": Argument 2 must be a register! ("+instruction+")";
             throw railway_syntax_error(&message[0]);
         }
@@ -159,7 +154,7 @@ void value_validate(map<string, vector<string>> &program) {
 bool is_valid_instruction(string &instruction) {
     bool is_valid = false;
 
-    string instructions[6] = {"get", "put", "add", "sub", "lda", "dne"};
+    string instructions[6] = {"get", "add", "sub"};
     int size = 6;
 
     for (int i = 0; i < size; i++) {

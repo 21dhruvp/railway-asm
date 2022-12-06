@@ -1,16 +1,33 @@
+;(program
+;    get r1 n1 0   ; load n1 into r1
+;    get r2 n2 0   ; load n2 into r2
+;
+;    %add_two_nums ; compute sum, result in r0
+;
+;    get r1 n3 0   ; load n3 into r1
+;    get r2 n4 0   ; load n4 into r2
+
+    %add_two_nums ; compute sum agai;n, result in r0
+
+;    put r0 n1 0
+;)
+;(data
+;    [n1 integer] 9
+;    [n2 integer] 10
+;    %add_two_nums
+;)
+
 (program
-    get r1 n1 0
-    get r2 n2 0
+    GET r5 c 0 ; get first label into r5
+    GET r6 t 0 ; get second label 
 
-    %add_two_nums
+    SUB r7 r6 r5
+    ADD r4 r5 8
 
-    get r1 n3 0
-    get r2 n4 0
-
-    %add_two_nums
+    SUB r1 r0 27
 )
 (data
-    [n1 integer] 9
-    [n2 integer] 10
-    %add_two_nums
+    [c integer] 0
+    [t integer] 12
+    [a integer] 9
 )

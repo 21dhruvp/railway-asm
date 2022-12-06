@@ -20,7 +20,7 @@ void stitch(map<string, vector<string>> &main, vector<string> secondary_filepath
                 continue;
             }
 
-            trim(main[key][i]);
+            main[key][i] = reduce(main[key][i]);
 
             // look for outside insertions
             if (main[key][i].at(0) == '%') {
@@ -44,7 +44,7 @@ void stitch(map<string, vector<string>> &main, vector<string> secondary_filepath
 
                 // insert all contents at the position of the reference
                 for (size_t j = 0; j < stitchable.size(); j++) {
-                    trim(stitchable[j]);
+                    stitchable[j] = reduce(stitchable[j]);
                     main[key].insert(main[key].begin() + i, stitchable[j]);
                 }
             }

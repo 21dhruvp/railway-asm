@@ -18,7 +18,8 @@ vector<string> load_program(string &filepath);
 void write_memory_file(string &filepath, string &contents);
 vector<string> tokenize(string s, string delimiter);
 int fast_atoi(const char* str);
-void trim(string& s);
+string trim(string &str, const string &whitespace = " \t");
+string reduce(string &str, const string &fill = " ", const string &whitespace = " \t");
 string binary_n_bit_representation(int n, int width);
 
 #endif

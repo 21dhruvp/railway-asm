@@ -16,6 +16,17 @@
 
 using namespace std;
 
+vector<string> strip_comments(vector<string> &contents) {
+    vector<string> stripped;
+
+    for (const string &line : contents) {
+        string trimmable = tokenize(line, ";")[0];
+        stripped.push_back(reduce(trimmable));
+    }
+
+    return stripped;
+}
+
 map<string, vector<string>> parse_directives(vector<string> &contents) {
     // Takes the program and splits it up into its directives.
     map<string, vector<string>> directives;
@@ -26,7 +37,7 @@ map<string, vector<string>> parse_directives(vector<string> &contents) {
 
     for (size_t i = 0; i < contents.size(); i++) {
 
-        trim(contents[i]);
+        contents[i] = reduce(contents[i]);
 
         if (contents[i].size() == 0) {
             continue;
