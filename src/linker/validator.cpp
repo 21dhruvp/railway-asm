@@ -1,3 +1,11 @@
+/**
+ * utility.cpp
+ * railway-asm
+ * 
+ * Created on November 28th, 2022 by Ryan Monaghan
+ * Copyright 2022 Ryan Monaghan, Dhruv Prasanna. All rights reserved.
+*/
+
 #include <string>
 #include <vector>
 #include <map>

@@ -1,3 +1,11 @@
+/**
+ * main.cpp
+ * railway-asm
+ * 
+ * Created on November 28th, 2022 by Ryan Monaghan
+ * Copyright 2022 Ryan Monaghan. All rights reserved.
+*/
+
 #ifndef VALIDATOR_H
 #define VALIDATOR_H
 
