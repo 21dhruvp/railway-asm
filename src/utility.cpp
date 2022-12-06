@@ -10,6 +10,8 @@
 #include <fstream>
 #include <iostream>
 #include <vector>
+#include <bitset>
+#include <algorithm>
 
 #include "../include/errors.h"
 #include "../include/utility.h"
@@ -100,7 +102,7 @@ string reduce(string &str, const string &fill, const string &whitespace) {
 }
 
 string binary_n_bit_representation(int n, int width) {
-    string bin = bitset<64> (n).to_string();
+    string bin = bitset<64>(n).to_string();
 
     const auto start = bin.find('1');
      
@@ -112,10 +114,10 @@ string binary_n_bit_representation(int n, int width) {
         bin = "0";
     }
     
-    if (bin.size() > width) {
+    if (bin.size() > static_cast<size_t>(width)) {
         string message = Color().RED+"missed value in validator"+Color().reset+": Integer too large! ("+(to_string(n))+")";
         throw railway_syntax_error(&message[0]);
-    } else if (bin.size() < width) {
+    } else if (bin.size() < static_cast<size_t>(width)) {
         int len = bin.size();
         for (int i = 0; i < width - len; i++) {
             bin = "0"+bin;
