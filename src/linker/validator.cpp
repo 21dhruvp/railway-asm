@@ -96,7 +96,7 @@ void value_validate(map<string, vector<string>> &program) {
         vector<string> tokenized = tokenize(instruction, " ");
         
         if (tokenized[0] != "lda" && tokenized[0] != "dne") {
-            for (int i = 1; i < tokenized.size(); i++) {
+            for (int i = 1; i < static_cast<int>(tokenized.size()); i++) {
 
                 if (tokenized[i].at(0) == 'r' && tokenized[i].size() >= 2) {
                     int r_val = tokenized[i].at(1) - '0';
